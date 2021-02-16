@@ -34,6 +34,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/users/register").permitAll()
 		.antMatchers("/articles").permitAll()
 		.antMatchers("/articles/{id}").permitAll()
+		.antMatchers("/instaurl/content").permitAll()
 		.anyRequest().authenticated()
 		.and().httpBasic()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
