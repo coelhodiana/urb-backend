@@ -24,7 +24,7 @@ public class Article {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 
-	@Size(min = 5, max = 100)
+	@Size(min = 5, max = 200)
 	private String title;
 	
 	@Lob

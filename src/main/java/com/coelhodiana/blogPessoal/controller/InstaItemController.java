@@ -2,8 +2,6 @@ package com.coelhodiana.blogPessoal.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,42 +15,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coelhodiana.blogPessoal.model.Article;
-import com.coelhodiana.blogPessoal.repository.ArticleRepository;
+import com.coelhodiana.blogPessoal.model.InstaItem;
+import com.coelhodiana.blogPessoal.repository.InstaItemRepository;
 
 @RestController
-@RequestMapping("/articles")
+@RequestMapping("/instaitems")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ArticleController {
+public class InstaItemController {
 	
 	@Autowired
-	private ArticleRepository repository;
-	
+	private InstaItemRepository repository;
+
 	@GetMapping
-	public ResponseEntity<List<Article>> GetAll() {
+	public ResponseEntity<List<InstaItem>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Article> GetById(@PathVariable long id){
+	public ResponseEntity<InstaItem> GetById(@PathVariable long id){
 		return repository.findById(id)
 				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/title/{title}")
-	public ResponseEntity<List<Article>> GetByTitle(@PathVariable String title){
-		return ResponseEntity.ok(repository.findAllByTitleContainingIgnoreCase(title));
-	}
-	
 	@PostMapping
-	public ResponseEntity<Article> post (@RequestBody @Valid Article article) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(article));
+	public ResponseEntity<InstaItem> post (@RequestBody InstaItem instaItem) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(instaItem));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Article> put (@RequestBody @Valid Article article) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(article));
+	public ResponseEntity<InstaItem> put (@RequestBody InstaItem instaItem) {
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(instaItem));
 	}
 	
 	@DeleteMapping("/{id}")
